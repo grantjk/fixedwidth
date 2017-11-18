@@ -16,15 +16,12 @@ module Fixedwidth
     def to_a
       array = Fixedwidth.column_positions.map do |start, stop|
         field = @line[start, stop]
-
-        return nil if field.nil?
-        
+        field = "" if field.nil?
         field.strip!
-        if Fixedwidth.nil_blanks? && field.length == 0
-         field = nil
-        end
+        field = "" if Fixedwidth.nil_blanks? && field.length == 0
         field
       end
+      array
     end
 
     def to_csv
